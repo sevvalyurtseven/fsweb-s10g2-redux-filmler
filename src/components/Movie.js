@@ -1,13 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import { deleteMovie } from '../actions/movieActions';
 
 const Movie = (props) => {
-  const { id } = useParams();
+  const { id } = useParams(); //id useParams'dan geldiginde string olur.
   const { push } = useHistory();
+
+  const dispatch = useDispatch(); //dispatch tanimlandi
 
   const movies = useSelector((store) => store.movies);
   const movie = movies.find(movie => movie.id === Number(id));
+
+  const handleDelete = () => {
+    dispatch(deleteMovie(Number(id))); 
+  }
 
   return (
     <div className="bg-white rounded-md shadow flex-1">
