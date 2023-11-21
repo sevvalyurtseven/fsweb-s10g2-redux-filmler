@@ -1,11 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
 const Movie = (props) => {
   const { id } = useParams();
   const { push } = useHistory();
 
-  const movies = [];
+  const movies = useSelector((store) => store.movies);
   const movie = movies.find(movie => movie.id === Number(id));
 
   return (
