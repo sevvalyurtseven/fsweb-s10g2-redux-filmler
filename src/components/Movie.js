@@ -13,6 +13,8 @@ const Movie = (props) => {
   const movies = useSelector((store) => store.movieReducer.movies);
   const movie = movies.find(movie => movie.id === Number(id));
 
+  const displayFavorites = useSelector((store) => store.favoriteReducer.displayFavorites)
+
   const handleDelete = () => {
     dispatch(deleteMovie(Number(id)));
     push("/movies"); 
@@ -51,7 +53,7 @@ const Movie = (props) => {
       </div>
       <div className="px-5 py-3 border-t border-zinc-200 flex justify-end gap-2">
         <button type="button" onClick ={handleDelete} className="myButton bg-red-600 hover:bg-red-500">Sil</button>
-        <button onClick={handleFavoriteAdd} className="myButton bg-blue-600 hover:bg-blue-500 ">Favorilere ekle</button>
+        {displayFavorites && ( <button onClick={handleFavoriteAdd} className="myButton bg-blue-600 hover:bg-blue-500 ">Favorilere ekle</button>)}
       </div>
     </div>
   );
